@@ -1,4 +1,5 @@
-import time 
+import time
+import random
 def quiz():
     print('Welcome to the quiz game. There are 5 maths related questions mixed altogether.')
     print('Give the answers in words')
@@ -46,6 +47,28 @@ def quiz():
     time.sleep(4)
     print(f'You got {score} questions correct out of 5.')
     percent = (score//5)*100
-    print(f'You got a percentage of {percent}%')
+    print(f'You got a percentage of {percent}%') 
+class Login:
+    def __init__(self, name, playerId):
+        self.name = name 
+        self.playerId = playerId
+    def login(self):
+        with open('login.txt', 'w') as f:
+            f.write(f'{self.name}')
+            f.write(f'\n{self.playerId}')
+    def get_into_game(self):
+        with open('login.txt') as f:
+            if self.playerId in f.read():
+                ask = input('Are you ready to play this game? y/n\n')
+                if ask == 'y':
+                    quiz()
+                else:
+                    quit()
+            else:
+                print('You have not logged in yet!!! *_*')
 if __name__ == "__main__":
-    quiz()
+    user = input('Enter your name \n')
+    id = (f'7jROwQfo{random.randrange(18,108)}1jp')
+    login = Login(f'{user}', id)
+    login.login()
+    login.get_into_game()
